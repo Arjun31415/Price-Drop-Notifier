@@ -10,7 +10,7 @@ from models.model import Model
 
 
 class Alert(Model):
-    collection = "Alerts"
+    collection = "alerts"
     """
     Class for Alerts on `Item` object
     (`<models.item>`)

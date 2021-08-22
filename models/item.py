@@ -15,7 +15,7 @@ from .model import Model
 
 
 class Item(Model):
-    collection = "Items"
+    collection = "items"
 
     def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None):
         super().__init__(_id=_id)
