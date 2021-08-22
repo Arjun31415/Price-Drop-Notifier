@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from models.alert import Alert
 from models.item import Item
 from models.store import Store
@@ -25,3 +25,14 @@ def new_alert():
         item.save_to_db()
         Alert(alert_name, item.get_id(), price_limit).save_to_db()
     return render_template('alerts/new_alert.html')
+
+
+@alert_blueprint.route('/edit/<string:alert_id>', methods=['GET', 'POST'])
+def edit_alert(alert_id):
+    alert = Alert.get_by_id(alert_id)
+    if request.method == 'POST':
+        price_limit = float(request.form['price_limit'])
+        alert.price_limit = price_limit
+        alert.save_to_db()
+        return redirect(url_for('.index'))
+    return render_template('alerts/edit_alerts.html', alert=alert)

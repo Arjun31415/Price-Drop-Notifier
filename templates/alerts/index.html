@@ -10,9 +10,12 @@
                 <div class="list-group-item">
                     <h4 class="list-group-item-heading">{{ alert.name }}</h4>
                     <p>
-                        <a href="{{ alert.item.url }}">{{ alert.item_id }} (last price {{ alert.item.price }}
+                        <a href="{{ alert.item.url }}">{{ alert.item_id }} (last price {{ alert.item.price }})
                         </a>
                     </p>
+                    <a class="btn btn-secondary" href="{{ url_for('alert.edit_alert',alert_id=alert._id) }}">
+                        Edit
+                    </a>
                 </div>
             {% endfor %}
         </div>

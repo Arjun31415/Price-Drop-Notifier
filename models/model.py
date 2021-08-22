@@ -13,6 +13,7 @@ T = TypeVar('T', bound='Model')
 
 class Model(metaclass=ABCMeta):
     collection: str
+    _id: str
 
     def __init__(self, *args, **kwargs):
         pass
