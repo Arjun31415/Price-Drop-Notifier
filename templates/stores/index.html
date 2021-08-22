@@ -10,9 +10,13 @@
                 <div class="list-group-item">
                     <h4 class="list-group-item-heading">{{ store.name }}</h4>
                     <p>
-
                         For URLs starting with {{ store.url_prefix }}.
                     </p>
+                    <a class="btn btn-secondary"
+                       href="{{ url_for('stores.edit_store', store_id=store._id ) }}">
+                        Edit
+                    </a>
+
                 </div>
             {% endfor %}
         </div>
