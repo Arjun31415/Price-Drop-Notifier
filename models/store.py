@@ -1,23 +1,19 @@
+import uuid
+
 from models.model import Model
 from typing import Dict
 import re
+from dataclasses import dataclass, field
 
 
+@dataclass
 class Store(Model):
-    collection = "stores"
-
-    def __init__(
-            self, name: str,
-            url_prefix: str,
-            tag_name: str,
-            query: Dict,
-            _id: str = None
-    ):
-        super().__init__(_id=id)
-        self.url_prefix = url_prefix
-        self.tag_name = tag_name
-        self.query = query
-        self.name = name
+    collection: str = field(init=False, default="stores")
+    name: str
+    url_prefix: str
+    tag_name: str
+    query: Dict
+    _id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
     def json(self):
         return {

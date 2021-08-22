@@ -14,8 +14,8 @@ T = TypeVar('T', bound='Model')
 class Model(metaclass=ABCMeta):
     collection: str
 
-    def __init__(self, _id, *args, **kwargs):
-        self._id = _id or uuid.uuid4().hex
+    def __init__(self, *args, **kwargs):
+        pass
 
     @abstractmethod
     def json(self):

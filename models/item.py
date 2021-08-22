@@ -5,6 +5,7 @@
 
 import re
 import uuid
+from dataclasses import dataclass, field
 from typing import Dict, List
 
 import requests
@@ -14,19 +15,21 @@ from common.database import Database
 from .model import Model
 
 
+@dataclass(eq=False)
 class Item(Model):
-    collection = "items"
+    collection: str = field(init=False, default="items")
+    url: str
+    tag_name: str
+    query: Dict
+    _id: str = field(default_factory=lambda: uuid.uuid4().hex)
+    headers: Dict = field(init=False, default={
+        "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0)\
+                AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141\
+                Safari/537.36"
+    }
+                          )
 
-    def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None):
-        super().__init__(_id=_id)
-        self.url = url
-        self.tag_name = tag_name
-        self.query = query
-        self.headers = {
-            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0)\
-            AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.141\
-            Safari/537.36"
-        }
+    def __post_init__(self):
         self.price: float = None
 
     def __repr__(self):
