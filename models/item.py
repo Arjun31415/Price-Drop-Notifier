@@ -18,7 +18,6 @@ class Item(Model):
     collection = "Items"
 
     def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None):
-
         super().__init__(_id=_id)
         self.url = url
         self.tag_name = tag_name
@@ -57,9 +56,11 @@ class Item(Model):
         return self.price
 
     def json(self) -> Dict:
-        return{
+        return {
             "_id": self._id,
             "url": self.url,
             "tag_name": self.tag_name,
             "query": self.query,
         }
+
+    def get_id(self): return self._id;
