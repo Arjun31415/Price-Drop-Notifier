@@ -21,6 +21,7 @@ def new_alert():
         # find the item_id from the Database
         store = Store.find_by_url(item_url)
         item = Item(item_url, store.tag_name, store.query)
+        item.load_price()
         item.save_to_db()
         Alert(alert_name, item.get_id(), price_limit).save_to_db()
     return render_template('alerts/new_alert.html')

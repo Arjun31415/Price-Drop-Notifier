@@ -11,8 +11,7 @@ from typing import Dict, List
 import requests
 from bs4 import BeautifulSoup
 from common.database import Database
-
-from .model import Model
+from models.model import Model
 
 
 @dataclass(eq=False)
@@ -21,6 +20,7 @@ class Item(Model):
     url: str
     tag_name: str
     query: Dict
+    price: float = field(default=None)
     _id: str = field(default_factory=lambda: uuid.uuid4().hex)
     headers: Dict = field(init=False, default={
         "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 12871.102.0)\
@@ -28,9 +28,6 @@ class Item(Model):
                 Safari/537.36"
     }
                           )
-
-    def __post_init__(self):
-        self.price: float = None
 
     def __repr__(self):
         return f"<Item {self.url}, Price {self.price}>"
@@ -63,6 +60,7 @@ class Item(Model):
             "_id": self._id,
             "url": self.url,
             "tag_name": self.tag_name,
+            "price": self.price,
             "query": self.query,
         }
 
