@@ -16,6 +16,11 @@
                        href="{{ url_for('stores.edit_store', store_id=store._id ) }}">
                         Edit
                     </a>
+                    <a class="btn btn-danger"
+                       data-confirm="Are you sure you want to delete this Store"
+                       href="{{ url_for('stores.delete_store',store_id=store._id) }}">
+                        Permanently Delete
+                    </a>
 
                 </div>
             {% endfor %}
@@ -24,4 +29,6 @@
             Create new
         </a>
     </section>
+    <script src="{{ url_for('static',filename='confirm_delete.js') }}"></script>
+
 {% endblock %}
