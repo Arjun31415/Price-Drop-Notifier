@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, session
+from flask import Blueprint, render_template, request, session
 
 from models.user import User, UserErrors
 

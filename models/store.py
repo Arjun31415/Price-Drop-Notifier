@@ -1,9 +1,9 @@
+import re
 import uuid
+from dataclasses import dataclass, field
+from typing import Dict
 
 from models.model import Model
-from typing import Dict
-import re
-from dataclasses import dataclass, field
 
 
 @dataclass

@@ -1,9 +1,9 @@
 import uuid
 from dataclasses import dataclass, field
 
-from models.model import Model
-from common.utils import Utils
 import models.user.errors as UserErrors
+from common.utils import Utils
+from models.model import Model
 
 
 @dataclass

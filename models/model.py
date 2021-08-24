@@ -3,9 +3,7 @@
 # pylint: disable=missing-function-docstring
 # pylint: disable=import-error
 from abc import ABCMeta, abstractmethod
-from typing import List, Type, TypeVar, Union, Dict
-
-import elements as elements
+from typing import Dict, List, Type, TypeVar, Union
 
 from common.database import Database
 

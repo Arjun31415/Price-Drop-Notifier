@@ -1,5 +1,7 @@
-from flask import Blueprint, render_template, request, url_for, redirect
 import json
+
+from flask import Blueprint, redirect, render_template, request, url_for
+
 from models.store import Store
 from models.user import requires_admin
 
