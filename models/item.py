@@ -6,11 +6,11 @@
 import re
 import uuid
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict
 
 import requests
 from bs4 import BeautifulSoup
-from common.database import Database
+
 from models.model import Model
 
 

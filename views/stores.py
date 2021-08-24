@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect
 import json
 from models.store import Store
+from models.user import requires_admin
 
 store_blueprint = Blueprint('stores', __name__)
 
@@ -12,6 +13,7 @@ def index():
 
 
 @store_blueprint.route('/new', methods=['GET', 'POST'])
+@requires_admin
 def create_store():
     if request.method == 'POST':
         name = request.form['name']
@@ -23,6 +25,7 @@ def create_store():
 
 
 @store_blueprint.route('/edit/<string:store_id>', methods=['GET', 'POST'])
+@requires_admin
 def edit_store(store_id):
     store = Store.get_by_id(store_id)
     if request.method == 'POST':
@@ -41,6 +44,7 @@ def edit_store(store_id):
 
 
 @store_blueprint.route('/delete/<string:store_id>')
+@requires_admin
 def delete_store(store_id):
     Store.get_by_id(store_id).remove_from_db()
     return redirect(url_for('.index'))

@@ -2,9 +2,10 @@
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
 # pylint: disable=import-error
-import uuid
 from abc import ABCMeta, abstractmethod
 from typing import List, Type, TypeVar, Union, Dict
+
+import elements as elements
 
 from common.database import Database
 
@@ -35,6 +36,7 @@ class Model(metaclass=ABCMeta):
     @classmethod
     def all(cls: Type[T]) -> List[T]:
         elements_from_db = Database.find(cls.collection, {})
+        # noinspection PyTypeChecker
         return [cls(**elem) for elem in elements_from_db]
 
     @classmethod

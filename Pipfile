@@ -11,6 +11,7 @@ beautifulsoup4 = "*"
 autopep8 = "*"
 requests = "*"
 python-dotenv = "*"
+passlib = "*"
 
 [dev-packages]
 mypy = "*"
