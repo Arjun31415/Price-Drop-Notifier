@@ -64,4 +64,5 @@ class Item(Model):
             "query": self.query,
         }
 
-    def get_id(self): return self._id;
+    def get_id(self):
+        return self._id
