@@ -25,4 +25,4 @@ htmlcov/
 .coverage
 .coverage.*
 *,cover
-.views/send_email.py
+views/send_email.py
