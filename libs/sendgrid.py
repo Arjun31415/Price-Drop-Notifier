@@ -7,7 +7,7 @@ from sendgrid.helpers.mail import Mail
 load_dotenv()
 message = Mail(
     from_email='arjunp0710@gmail.com',
-    to_emails='arnavp3007@gmail.com',
+    to_emails='arjunp0710@gmail.com',
     subject='Sending with Twilio SendGrid is Fun',
     html_content='<strong>Please reply if u got this \n from Python</strong>')
 try:
