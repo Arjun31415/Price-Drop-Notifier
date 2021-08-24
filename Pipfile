@@ -12,6 +12,7 @@ autopep8 = "*"
 requests = "*"
 python-dotenv = "*"
 passlib = "*"
+sendgrid = "*"
 
 [dev-packages]
 mypy = "*"

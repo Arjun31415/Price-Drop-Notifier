@@ -3,12 +3,13 @@ import json
 from flask import Blueprint, redirect, render_template, request, url_for
 
 from models.store import Store
-from models.user import requires_admin
+from models.user import requires_admin, requires_login
 
 store_blueprint = Blueprint('stores', __name__)
 
 
 @store_blueprint.route('/')
+@requires_login
 def index():
     stores = Store.all()
     return render_template('stores/index.html', stores=stores)
