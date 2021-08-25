@@ -39,6 +39,10 @@ class SendGrid:
                 raise SendGirdException('An error occurred while sending the email')
             elif response.status_code == 202:
                 print('Sending E-mail')
+            elif response.status_code >= 400:
+                raise SendGirdException(f'Bad Request error: {response.status_code}')
+            elif response.status_code >= 500:
+                raise SendGirdException(f'Unexpected Error occured: {response.status_code}')
             return response
         except Exception as e:
             raise e
