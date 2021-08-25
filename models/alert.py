@@ -51,7 +51,7 @@ class Alert(Model):
                 "
             )
             resp = SendGrid.send_email(
-                email=['arjunp0710@gmail.com'],
+                email=self.user_email,
                 subject='test',
                 text=f"Your alert {self.name} has reached a price under {self.price_limit}. The latest price is {self.item.price}. Go to this address to check your item: {self.item.url}.",
                 html=f'<p>Your alert {self.name} has reached a price under {self.price_limit}.</p><p>The latest price '

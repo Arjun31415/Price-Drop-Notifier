@@ -35,11 +35,16 @@ def edit_store(store_id):
         name = request.form['name']
         url_prefix = request.form['url_prefix']
         tag_name = request.form['tag_name']
-        query = json.loads(request.form['query'])
+        form_query = request.form['query']
+        form_query.replace("'", '"')
+        print(form_query)
+        query = json.loads(form_query)
+        regex_query = json.loads(request.form['regex-query'])
         store.name = name
         store.url_prefix = url_prefix
         store.tag_name = tag_name
         store.query = query
+        store.regex_query = regex_query
         store.save_to_db()
         return redirect(url_for('.index'))
 

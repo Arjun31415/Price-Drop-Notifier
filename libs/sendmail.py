@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-from typing import List
+from typing import List, Union
 from requests import Response, post
 
 
@@ -18,9 +18,11 @@ class SendGrid:
     FROM_EMAIL = 'pricingalerts@gmail.com'
 
     @classmethod
-    def send_email(cls, email: List[str], subject: str, text: str, html: str) -> Response:
+    def send_email(cls, email: Union[str, list[str]], subject: str, text: str, html: str) -> Response:
         if cls.SENDGRID_API_KEY is None:
-            raise SendGirdException("API key is not set in .env")
+            cls.SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY', None)
+            if cls.SENDGRID_API_KEY is None:
+                raise SendGirdException("API key is not set in .env")
         message = Mail(
             from_email=cls.FROM_EMAIL,
             to_emails=email,

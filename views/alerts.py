@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, session, url_for
+from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 
 from models.alert import Alert
 from models.item import Item
@@ -24,9 +24,18 @@ def new_alert():
         price_limit = float(request.form['price_limit'])
 
         # find the item_id from the Database
-        store = Store.find_by_url(item_url)
-        item = Item(item_url, store.tag_name, store.query)
-        item.load_price()
+        stores = Store.find_by_url(item_url)
+        item = Item(
+            item_url,
+            [store.tag_name for store in stores],
+            [store.query for store in stores],
+            [store.regex_query for store in stores]
+        )
+        try:
+            item.load_price()
+        except ValueError:
+            flash('Store does not exist for this Item.', 'danger')
+            return render_template('alerts/new_alert.html')
         item.save_to_db()
         Alert(alert_name, item.get_id(), price_limit, session['email']).save_to_db()
     return render_template('alerts/new_alert.html')

@@ -1,5 +1,7 @@
+import json
 import os
 
+import jinja2
 from flask import Flask, render_template
 
 from views.alerts import alert_blueprint
@@ -11,6 +13,7 @@ app.secret_key = os.urandom(64)
 app.config.update(
     ADMIN=os.environ.get('ADMIN')
 )
+jinja2.Environment().filters['tojson'] = json.dumps
 
 
 @app.route('/', methods=['GET'])

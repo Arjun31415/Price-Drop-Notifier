@@ -12,7 +12,7 @@
                        id="name"
                        name="name"
                        placeholder="John Lewis"
-                       value="{{ store.name }}"
+                       value="{{ (store.name) }}"
                 />
             </div>
             <div class="form-group">
@@ -48,14 +48,35 @@
                        class="form-control"
                        id="query"
                        name="query"
-                       placeholder='{"class": "price price--large"}'
-                       value="{{ store.query }}"
+                       placeholder='{{ store.query|tojson }}'
+                       value='{{ store.query|tojson }}'
                        aria-describedby="queryHelp"/>
                 <small id="queryHelp" class="form-text text-muted">
                     What attributes are on the element that contain the price? This is so we can find it on the page.
                 </small>
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <div class="form-group">
+                <label for="regex-query">HTML Regex Query</label>
+                <input type="text"
+                       class="form-control"
+                       id="regex-query"
+                       name="regex-query"
+                        {% if store.regex_query %}
+                       placeholder='{{ store.regex_query|tojson }}'
+                       value='{{ store.regex_query|tojson }}'
+
+                        {% endif %}
+                       aria-describedby="queryHelp"/>
+                <small id="regex-queryHelp" class="form-text text-muted">
+                    Regex Query instead of normal HTML tag query.
+                    <br/>
+                    This query is given more importance in the search,
+                    <br/>
+                    i.e
+                    if a store has regex_query set then html_query will be ignored
+                </small>
+            </div>
+            <button type="submit" class="btn btn-primary">Edit</button>
         </form>
     </section>
 {% endblock %}

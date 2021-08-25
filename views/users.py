@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, request, session
+from flask import Blueprint, flash, redirect, render_template, request, session, url_for
 
 from models.user import User, UserErrors
 
@@ -38,5 +38,9 @@ def login_user():
 
 @user_blueprint.route('/logout')
 def logout():
-    session['email'] = None
-    return redirect('.user_login')
+    if 'email' in session:
+        session['email'] = None
+        flash('Successfully logged out', 'success')
+    else:
+        flash('User is not logged in to logout', 'warning')
+    return redirect(url_for('.login_user'))

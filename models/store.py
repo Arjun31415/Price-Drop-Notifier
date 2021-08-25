@@ -13,6 +13,7 @@ class Store(Model):
     url_prefix: str
     tag_name: str
     query: Dict
+    regex_query: Dict = field(default=None)
     _id: str = field(default_factory=lambda: uuid.uuid4().hex)
 
     def json(self):
@@ -22,6 +23,7 @@ class Store(Model):
             "url_prefix": self.url_prefix,
             "tag_name": self.tag_name,
             "query": self.query,
+            "regex_query": self.regex_query
         }
 
     @classmethod
@@ -29,12 +31,12 @@ class Store(Model):
         return cls.find_one_by("name", store_name)
 
     @classmethod
-    def get_by_url_prefix(cls, url_prefix) -> "Store":
+    def get_by_url_prefix(cls, url_prefix) -> list["Store"]:
         url_regex = {"$regex": "^{}".format(url_prefix)}
-        return cls.find_one_by("url_prefix", url_regex)
+        return cls.find_many_by("url_prefix", url_regex)
 
     @classmethod
-    def find_by_url(cls, url: str) -> "Store":
+    def find_by_url(cls, url: str) -> list["Store"]:
         """
         Return a store from a url like
         "https://www.johnlewis.com/john-lewis-partners-natural-collection-swaledale-wool-11400-king-size-medium-tension-pocket-spring-mattress/p4287158"
