@@ -14,6 +14,7 @@ app.config.update(
     ADMIN=os.environ.get('ADMIN')
 )
 jinja2.Environment().filters['tojson'] = json.dumps
+jinja2.Environment(autoescape=True)
 
 
 @app.route('/', methods=['GET'])
