@@ -52,13 +52,13 @@ class Item(Model):
                     print(query[tag])
                     query[tag] = re.compile(query[tag])
             try:
-                element = soup.find(tag_name, query)
+                element = soup.find_all(tag_name, query)
 
-                string_price = element.text.strip()
+                prices = element
                 print(query)
                 print(element)
-                print(string_price)
-                prices = string_price.split(',')
+                # print(string_price)
+                # prices = string_price.split(',')
                 print(prices)
             except AttributeError:
                 self.price = None
@@ -67,7 +67,7 @@ class Item(Model):
                 # string_price = "£4,950.78"
                 for string_price in prices:
                     pattern = re.compile(r"([0-9]+,?[0-9]*\.?[0-9]*)")
-                    match = pattern.search(string_price)
+                    match = pattern.search(string_price.text)
                     found_price = match.group(1)
                     found_price = found_price.replace(',', '')
                     price = 1e9

@@ -22,8 +22,14 @@ def create_store():
         name = request.form['name']
         url_prefix = request.form['url_prefix']
         tag_name = request.form['tag_name']
-        query = json.loads(request.form['query'])
-        Store(name, url_prefix, tag_name, query).save_to_db()
+        query = None
+        regex_query = None
+        if request.form['query'] is not None:
+            print("form query: ", request.form['query'])
+            query = json.loads(request.form['query'])
+        if request.form['regex-query'] is not None:
+            regex_query = json.loads(request.form['regex-query'])
+        Store(name, url_prefix, tag_name, query, regex_query=regex_query).save_to_db()
     return render_template('stores/new_store.html')
 
 
