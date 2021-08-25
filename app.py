@@ -13,8 +13,7 @@ app.secret_key = os.urandom(64)
 app.config.update(
     ADMIN=os.environ.get('ADMIN')
 )
-jinja2.Environment().filters['tojson'] = json.dumps
-jinja2.Environment(autoescape=True)
+jinja2.Environment(autoescape=True).filters['tojson'] = json.dumps
 
 
 @app.route('/', methods=['GET'])
