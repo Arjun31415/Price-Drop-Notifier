@@ -6,6 +6,7 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Dict
 
+from libs.sendmail import SendGrid
 from models.item import Item
 from models.model import Model
 from models.user import User
@@ -49,3 +50,11 @@ class Alert(Model):
                 Latest price:{self.item.price}\
                 "
             )
+            resp = SendGrid.send_email(
+                email=['arjunp0710@gmail.com'],
+                subject='test',
+                text=f"Your alert {self.name} has reached a price under {self.price_limit}. The latest price is {self.item.price}. Go to this address to check your item: {self.item.url}.",
+                html=f'<p>Your alert {self.name} has reached a price under {self.price_limit}.</p><p>The latest price '
+                     f'is {self.item.price}. Check your item out <a href="{self.item.url}>here</a>.</p>',
+            )
+            print(resp.status_code)

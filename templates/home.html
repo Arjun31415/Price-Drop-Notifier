@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Pricing Alerts</h1>
+        <p class="lead">
+            We scrape online shopping stores to alert you of current price and price drops in items that interest you.
+            Check out the currently supported <a href="{{ url_for('stores.index') }}">stores</a> .
+            More stores will always be added.
+        </p>
+        <hr class="my-4"/>
+        <p>Just sign up, and get started by adding the URL of your item that
+            you wish to keep track of. We'll do the rest
+        </p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('users.register_user') }}">
+            Let's Go
+        </a>
+
+    </div>
+
+{% endblock %}
