@@ -9,7 +9,7 @@ from views.stores import store_blueprint
 from views.users import user_blueprint
 
 
-def create_app():
+def create_app() -> Flask:
     app = Flask(__name__)
     app.secret_key = os.urandom(64)
     app.config.update(
@@ -24,6 +24,6 @@ def create_app():
     app.register_blueprint(alert_blueprint, url_prefix="/alerts")
     app.register_blueprint(store_blueprint, url_prefix="/stores")
     app.register_blueprint(user_blueprint, url_prefix="/users")
-
+    return app
 # if __name__ == '__main__':
 #     app.run(debug=True)
