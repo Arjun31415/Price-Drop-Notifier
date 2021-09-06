@@ -26,3 +26,4 @@ htmlcov/
 .coverage.*
 *,cover
 views/send_email.py
+dev/temp.py
