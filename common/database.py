@@ -16,9 +16,9 @@ class Database:
 
     client = pymongo.MongoClient(
         "mongodb+srv://" +
-        urllib.parse.quote_plus(os.environ.get("MONGO_USER")) +
+        (os.environ.get("MONGO_USER")) +
         ":" +
-        urllib.parse.quote_plus(os.environ.get("MONGO_PWD")) +
+        (os.environ.get("MONGO_PWD")) +
         "@app.mrdhg.mongodb.net/App?retryWrites=true&w=majority"
     )
     DATABASE = client.Main
